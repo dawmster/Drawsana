@@ -8,10 +8,50 @@
 
 import UIKit
 
-public struct PenLineSegment: Codable, Equatable {
-  public var a: CGPoint
-  public var b: CGPoint
-  public var width: CGFloat
+public class PenLineSegment: Codable, Equatable {
+  public static func == (lhs: PenLineSegment, rhs: PenLineSegment) -> Bool {
+    return lhs.a == rhs.a && lhs.b == rhs.b
+  }
+  
+  public var a: CGPoint{
+    didSet {
+        a_percent = .zero
+    }
+  }
+  public var b: CGPoint {
+    didSet {
+        b_percent = .zero
+    }
+  }
+  public var width: CGFloat  {
+    didSet {
+      width_percent = .zero
+    }
+  }
+  var a_percent : CGPoint = .zero
+  var b_percent : CGPoint = .zero
+  var width_percent: CGFloat = 0.0
+  
+  public func compute_percents_if_necessary( ContextWidth: Int , ContextHeight: Int){
+    let context_width = CGFloat(ContextWidth)
+    let context_height = CGFloat(ContextHeight)
+    if(a_percent == .zero){ self.a_percent = CGPoint(x: a.x/context_width, y: a.y/context_height ) }
+    if(b_percent == .zero){ b_percent = CGPoint(x: b.x/context_width, y: b.y/context_height ) }
+    if(width_percent == 0.0 ){ width_percent = width/context_width }
+    
+    let local_a = a_percent
+    let local_b = b_percent
+    a = CGPoint(x:a_percent.x * context_width, y: a_percent.y * context_height)
+    a_percent = local_a
+    
+    b = CGPoint(x:b_percent.x * context_width, y: b_percent.y * context_height)
+    b_percent = local_b
+
+    let local_w_perc = width_percent
+    width = local_w_perc * context_width
+    width_percent = local_w_perc
+    
+  }
 
   public init(a: CGPoint, b: CGPoint, width: CGFloat) {
     self.a = a
@@ -97,6 +137,11 @@ public class PenShape: Shape, ShapeWithStrokeState, ShapeSelectable {
   }
 
   private func render(in context: CGContext, onlyLast: Bool = false) {
+    
+    for seg in self.segments {
+      seg.compute_percents_if_necessary(ContextWidth: context.width, ContextHeight: context.height)
+    }
+
     transform.begin(context: context)
     context.saveGState()
     if isEraser {
