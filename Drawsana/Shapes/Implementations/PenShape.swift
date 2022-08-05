@@ -13,17 +13,17 @@ public class PenLineSegment: Codable, Equatable {
     return lhs.a == rhs.a && lhs.b == rhs.b
   }
   
-  public var a: CGPoint{
+  public var a: CGPoint = .zero {
     didSet {
         a_percent = .zero
     }
   }
-  public var b: CGPoint {
+  public var b: CGPoint = .zero {
     didSet {
         b_percent = .zero
     }
   }
-  public var width: CGFloat  {
+  public var width: CGFloat = 0.0 {
     didSet {
       width_percent = .zero
     }

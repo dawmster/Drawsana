@@ -20,6 +20,11 @@ public class TextShape: Shape, ShapeSelectable {
   /// This shape is positioned entirely with `TextShape.transform.translate`,
   /// rather than storing an explicit position.
   public var transform: ShapeTransform = .identity
+  var offset_percentage: CGPoint = .zero
+  var offset_transform_orig: CGPoint = .zero
+  var scale_percentage: CGFloat = 0.0
+  var scale_transform_orig: CGFloat = 0.0
+
   public var text = ""
   public var fontName: String = "Helvetica Neue"
   public var fontSize: CGFloat = 24
@@ -38,6 +43,24 @@ public class TextShape: Shape, ShapeSelectable {
     return UIFont(name: fontName, size: fontSize)!
   }
 
+  public func compute_percents_if_necessary( ContextWidth: Int , ContextHeight: Int){
+    let context_width = CGFloat(ContextWidth)
+    let context_height = CGFloat(ContextHeight)
+    if( transform.translation != offset_transform_orig ){
+      offset_percentage.x = transform.translation.x / context_width
+      offset_percentage.y = transform.translation.y / context_height
+      offset_transform_orig = transform.translation
+    }
+    
+    transform.translation = CGPoint(x: offset_percentage.x * context_width, y: offset_percentage.y * context_height)
+
+    if( transform.scale != scale_transform_orig ){
+      scale_transform_orig = transform.scale
+      
+      scale_percentage = transform.scale / context_width
+    }
+    transform.scale = scale_percentage * context_width
+  }
   public init() {
   }
 
@@ -77,6 +100,8 @@ public class TextShape: Shape, ShapeSelectable {
   }
 
   public func render(in context: CGContext) {
+    self.compute_percents_if_necessary(ContextWidth: context.width, ContextHeight: context.height)
+
     if isBeingEdited { return }
     transform.begin(context: context)
     (self.text as NSString).draw(

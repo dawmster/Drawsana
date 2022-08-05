@@ -21,17 +21,41 @@ public class NgonShape:
     public static let type: String = "Ngon"
     
     public var id: String = UUID().uuidString
-    public var a: CGPoint = .zero
-    public var b: CGPoint = .zero
+    public var a: CGPoint = .zero { didSet { a_percent = .zero } }
+    var a_percent : CGPoint = .zero
+    public var b: CGPoint = .zero { didSet { b_percent = .zero  } }
+    var b_percent : CGPoint = .zero
     public var strokeColor: UIColor? = .black
     public var fillColor: UIColor? = .clear
-    public var strokeWidth: CGFloat = 10
+    public var strokeWidth: CGFloat = 10 { didSet { stroke_width_percent = 0.0 } }
+    var stroke_width_percent: CGFloat = 0.0
     public var capStyle: CGLineCap = .round
     public var joinStyle: CGLineJoin = .round
     public var dashPhase: CGFloat?
     public var dashLengths: [CGFloat]?
     public var transform: ShapeTransform = .identity
     public var sides: Int!
+  
+  public func compute_percents_if_necessary( ContextWidth: Int , ContextHeight: Int){
+    let context_width = CGFloat(ContextWidth)
+    let context_height = CGFloat(ContextHeight)
+    if(a_percent == .zero){ self.a_percent = CGPoint(x: a.x/context_width, y: a.y/context_height ) }
+    if(b_percent == .zero){ b_percent = CGPoint(x: b.x/context_width, y: b.y/context_height ) }
+    if(stroke_width_percent == 0.0 ){ stroke_width_percent = strokeWidth/context_width }
+    
+    let local_a = a_percent
+    let local_b = b_percent
+    a = CGPoint(x:a_percent.x * context_width, y: a_percent.y * context_height)
+    a_percent = local_a
+    
+    b = CGPoint(x:b_percent.x * context_width, y: b_percent.y * context_height)
+    b_percent = local_b
+    
+    let local_w_perc = stroke_width_percent
+    strokeWidth = local_w_perc * context_width
+    stroke_width_percent = local_w_perc
+    
+  }
 
     public var boundingRect: CGRect {
         return squareRect
@@ -92,6 +116,8 @@ public class NgonShape:
     }
     
     public func render(in context: CGContext) {
+        self.compute_percents_if_necessary(ContextWidth: context.width, ContextHeight: context.height)
+
         transform.begin(context: context)
         
         if let fillColor = fillColor {
