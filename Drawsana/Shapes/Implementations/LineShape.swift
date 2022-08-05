@@ -26,10 +26,25 @@ public class LineShape:
   public static let type: String = "Line"
 
   public var id: String = UUID().uuidString
-  public var a: CGPoint = .zero
-  public var b: CGPoint = .zero
+    public var a: CGPoint = .zero {
+        didSet {
+            a_percent = .zero
+        }
+    }
+  public var b: CGPoint = .zero {
+      didSet {
+          b_percent = .zero
+      }
+  }
+    var a_percent : CGPoint = .zero
+    var b_percent : CGPoint = .zero
   public var strokeColor: UIColor = .black
-  public var strokeWidth: CGFloat = 10
+    public var strokeWidth: CGFloat = 10 {
+        didSet {
+            stroke_width_percent = 0.0
+        }
+    }
+    var stroke_width_percent : CGFloat = 0.0
   public var capStyle: CGLineCap = .round
   public var joinStyle: CGLineJoin = .round
   public var dashPhase: CGFloat?
@@ -87,18 +102,41 @@ public class LineShape:
   }
 
   public func render(in context: CGContext) {
+      var local_a = a
+      var local_b = b
+      var local_strokeWidth = strokeWidth
+      let context_width = CGFloat(context.width)
+      let context_height = CGFloat(context.height)
+          if(self.a_percent == .zero){
+              self.a_percent.x = self.a.x / context_width;
+              self.a_percent.y = self.a.y / context_height;
+          } else{
+              local_a = CGPoint(x: self.a_percent.x * context_width, y: self.a_percent.y * context_height)
+          }
+          if(self.b_percent == .zero ){
+              self.b_percent.x = self.b.x / context_width;
+              self.b_percent.y = self.b.y / context_height;
+          } else {
+              local_b = CGPoint(x: self.b_percent.x * context_width, y: self.b_percent.y * context_height)
+          }
+      if(self.stroke_width_percent == 0.0){
+          self.stroke_width_percent = strokeWidth / context_width
+      }
+      else {
+          local_strokeWidth = stroke_width_percent * context_width
+      }
     transform.begin(context: context)
     context.setLineCap(capStyle)
     context.setLineJoin(joinStyle)
-    context.setLineWidth(strokeWidth)
+    context.setLineWidth(local_strokeWidth)
     context.setStrokeColor(strokeColor.cgColor)
     if let dashPhase = dashPhase, let dashLengths = dashLengths {
       context.setLineDash(phase: dashPhase, lengths: dashLengths)
     } else {
       context.setLineDash(phase: 0, lengths: [])
     }
-    context.move(to: a)
-    context.addLine(to: b)
+    context.move(to: local_a)
+    context.addLine(to: local_b)
     context.strokePath()
 
     if case .some(.standard) = arrowStyle {
