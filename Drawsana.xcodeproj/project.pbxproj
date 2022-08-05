@@ -73,6 +73,20 @@
 			remoteGlobalIDString = 37EB4ED8210649E100E10461;
 			remoteInfo = AMDrawingView;
 		};
+		D092A8D6289D041A00F7878F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D092A8D1289D041A00F7878F /* AlgoEngine_iOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D07184EB216F68EB006CAFEC;
+			remoteInfo = AlgoEngine_iOS;
+		};
+		D092A8D8289D041A00F7878F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D092A8D1289D041A00F7878F /* AlgoEngine_iOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D0158F1F24C71FF500F6034A;
+			remoteInfo = AlgoEngine_iOSTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -138,6 +152,8 @@
 		37EB4F0621064A6000E10461 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		37EB4F0821064A6000E10461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D024467721DA1ED000E431C8 /* StarTool_PentagonTool_TriangleTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarTool_PentagonTool_TriangleTool.swift; sourceTree = "<group>"; };
+		D092A8CC289C1A3400F7878F /* Drawsana Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Drawsana Demo.entitlements"; sourceTree = "<group>"; };
+		D092A8D1289D041A00F7878F /* AlgoEngine_iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AlgoEngine_iOS.xcodeproj; path = ../../Programowanie/AlgoEngine_Libs/AlgoEngine_Apple/iOS/AlgoEngine_iOS/AlgoEngine_iOS.xcodeproj; sourceTree = "<group>"; };
 		D0E97E8221D0D3BA007722D7 /* StarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarShape.swift; sourceTree = "<group>"; };
 		D0E97E8421D0DD90007722D7 /* NgonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NgonShape.swift; sourceTree = "<group>"; };
 		D0F3B43C21D34F4000701BB4 /* CGFloat+DrawsanaExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+DrawsanaExtensions.swift"; sourceTree = "<group>"; };
@@ -287,6 +303,7 @@
 				37EB4EFB21064A5E00E10461 /* Drawsana Demo */,
 				37EB4EE6210649E100E10461 /* Drawsana Tests */,
 				37EB4EDA210649E100E10461 /* Products */,
+				D092A8D0289D041A00F7878F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -325,6 +342,7 @@
 		37EB4EFB21064A5E00E10461 /* Drawsana Demo */ = {
 			isa = PBXGroup;
 			children = (
+				D092A8CC289C1A3400F7878F /* Drawsana Demo.entitlements */,
 				37EB4EFC21064A5E00E10461 /* AppDelegate.swift */,
 				37EB4EFE21064A5E00E10461 /* ViewController.swift */,
 				372093CE21345862001A906E /* ColorPickerViewController.swift */,
@@ -335,6 +353,23 @@
 				37EB4F0821064A6000E10461 /* Info.plist */,
 			);
 			path = "Drawsana Demo";
+			sourceTree = "<group>";
+		};
+		D092A8D0289D041A00F7878F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D092A8D1289D041A00F7878F /* AlgoEngine_iOS.xcodeproj */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D092A8D2289D041A00F7878F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D092A8D7289D041A00F7878F /* AlgoEngine_iOS.framework */,
+				D092A8D9289D041A00F7878F /* AlgoEngine_iOSTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,9 +390,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37EB4EED210649E100E10461 /* Build configuration list for PBXNativeTarget "Drawsana" */;
 			buildPhases = (
+				37EB4ED6210649E100E10461 /* Headers */,
 				37EB4ED4210649E100E10461 /* Sources */,
 				37EB4ED5210649E100E10461 /* Frameworks */,
-				37EB4ED6210649E100E10461 /* Headers */,
 				37EB4ED7210649E100E10461 /* Resources */,
 			);
 			buildRules = (
@@ -440,6 +475,12 @@
 			mainGroup = 37EB4ECF210649E100E10461;
 			productRefGroup = 37EB4EDA210649E100E10461 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D092A8D2289D041A00F7878F /* Products */;
+					ProjectRef = D092A8D1289D041A00F7878F /* AlgoEngine_iOS.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				37EB4ED8210649E100E10461 /* Drawsana */,
@@ -448,6 +489,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D092A8D7289D041A00F7878F /* AlgoEngine_iOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AlgoEngine_iOS.framework;
+			remoteRef = D092A8D6289D041A00F7878F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D092A8D9289D041A00F7878F /* AlgoEngine_iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = AlgoEngine_iOSTests.xctest;
+			remoteRef = D092A8D8289D041A00F7878F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		37EB4ED7210649E100E10461 /* Resources */ = {
@@ -799,11 +857,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Drawsana Demo/Drawsana Demo.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K34Z59STMC;
+				DEVELOPMENT_TEAM = 5CKGGNP3NH;
 				INFOPLIST_FILE = "$(SRCROOT)/Drawsana Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -811,8 +871,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.asana.AMDrawingView-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
@@ -821,11 +883,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Drawsana Demo/Drawsana Demo.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K34Z59STMC;
+				DEVELOPMENT_TEAM = 5CKGGNP3NH;
 				INFOPLIST_FILE = "$(SRCROOT)/Drawsana Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -833,8 +897,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.asana.AMDrawingView-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Release;
 		};
