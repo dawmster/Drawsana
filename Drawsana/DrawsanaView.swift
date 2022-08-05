@@ -256,9 +256,11 @@ public class DrawsanaView: UIView {
     let size = size ?? drawing.size
         return DrawsanaUtilities.renderImage(size: size, scale:scale) { (context: CGContext) -> Void in
       context.saveGState()
-      context.scaleBy(
-        x: size.width / self.drawing.size.width,
-        y: size.height / self.drawing.size.height)
+
+            // since shapes are now percentage of the drawing then this is not needed
+//      context.scaleBy(
+//        x: size.width / self.drawing.size.width,
+//        y: size.height / self.drawing.size.height)
       for shape in self.drawing.shapes {
         shape.render(in: context)
       }
