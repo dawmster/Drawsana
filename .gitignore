@@ -2,3 +2,4 @@
 .docs/
 build/
 .swiftpm
+.DS_Store
