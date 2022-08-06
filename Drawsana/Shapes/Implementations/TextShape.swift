@@ -11,7 +11,14 @@ import UIKit
 public class TextShape: Shape, ShapeSelectable {
   private enum CodingKeys: String, CodingKey {
     case id, transform, text, fontName, fontSize, fillColor, type,
-      explicitWidth, boundingRect
+      explicitWidth, boundingRect,
+      offset_percentage,
+      offset_transform_orig,
+      scale_percentage,
+      scale_transform_orig
+
+    
+    
   }
 
   public static let type = "Text"
@@ -80,6 +87,10 @@ public class TextShape: Shape, ShapeSelectable {
     explicitWidth = try values.decodeIfPresent(CGFloat.self, forKey: .explicitWidth)
     boundingRect = try values.decodeIfPresent(CGRect.self, forKey: .boundingRect) ?? .zero
     transform = try values.decode(ShapeTransform.self, forKey: .transform)
+    offset_percentage = try values.decode(CGPoint.self, forKey: .offset_percentage)
+    offset_transform_orig = try values.decode(CGPoint.self, forKey: .offset_transform_orig)
+    scale_percentage = try values.decode(CGFloat.self, forKey: .scale_percentage)
+    scale_transform_orig = try values.decode(CGFloat.self, forKey: .scale_transform_orig)
 
     if boundingRect == .zero {
       print("Text bounding rect not present. This shape will not render correctly because of a bug in Drawsana <0.10.0.")
@@ -97,6 +108,12 @@ public class TextShape: Shape, ShapeSelectable {
     try container.encodeIfPresent(explicitWidth, forKey: .explicitWidth)
     try container.encode(transform, forKey: .transform)
     try container.encode(boundingRect, forKey: .boundingRect)
+    try container.encode(offset_percentage, forKey: .offset_percentage)
+    try container.encode(offset_transform_orig, forKey: .offset_transform_orig)
+    try container.encode(scale_percentage, forKey: .scale_percentage)
+    try container.encode(scale_transform_orig, forKey: .scale_transform_orig)
+
+    
   }
 
   public func render(in context: CGContext) {

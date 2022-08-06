@@ -66,20 +66,37 @@ public class PenLineSegment: Codable, Equatable {
 
 public class PenShape: Shape, ShapeWithStrokeState, ShapeSelectable {
   private enum CodingKeys: String, CodingKey {
-    case id, isFinished, strokeColor, start, strokeWidth, segments, isEraser, type, transform
+    case id, isFinished, strokeColor, start, strokeWidth, segments, isEraser, type, transform, start_percent, stroke_width_percent
   }
 
   public static let type: String = "Pen"
 
   public var id: String = UUID().uuidString
   public var isFinished = true
-  public var start: CGPoint = .zero
+  public var start: CGPoint = .zero { didSet { start_percent = .zero } }
+  var start_percent: CGPoint = .zero
   public var strokeColor: UIColor = .black
-  public var strokeWidth: CGFloat = 10
+  public var strokeWidth: CGFloat = 10  { didSet { stroke_width_percent = 0.0 } }
+  var stroke_width_percent: CGFloat = 0.0
   public var segments: [PenLineSegment] = []
   public var isEraser: Bool = false
   public var transform: ShapeTransform = .identity
 
+  public func compute_percents_if_necessary( ContextWidth: Int , ContextHeight: Int){
+    let context_width = CGFloat(ContextWidth)
+    let context_height = CGFloat(ContextHeight)
+    if(start_percent == .zero){ self.start_percent = CGPoint(x: start.x/context_width, y: start.y/context_height ) }
+    if(stroke_width_percent == 0.0 ){ stroke_width_percent = strokeWidth/context_width }
+
+    let local_start_percent = start_percent
+    start = CGPoint(x:start_percent.x * context_width, y: start_percent.y * context_height)
+    start_percent = local_start_percent
+
+    let local_w_perc = stroke_width_percent
+    strokeWidth = local_w_perc * context_width
+    stroke_width_percent = local_w_perc
+
+  }
   public var boundingRect: CGRect {
     var minX = start.x, maxX = start.x
     var minY = start.y, maxY = start.y
@@ -115,6 +132,8 @@ public class PenShape: Shape, ShapeWithStrokeState, ShapeSelectable {
     segments = try values.decode([PenLineSegment].self, forKey: .segments)
     isEraser = try values.decode(Bool.self, forKey: .isEraser)
     transform = try values.decodeIfPresent(ShapeTransform.self, forKey: .transform) ?? .identity
+    start_percent = try values.decode(CGPoint.self, forKey: .start_percent)
+    stroke_width_percent = try values.decode(CGFloat.self, forKey: .stroke_width_percent)
   }
 
   public func encode(to encoder: Encoder) throws {
@@ -123,8 +142,10 @@ public class PenShape: Shape, ShapeWithStrokeState, ShapeSelectable {
     try container.encode(id, forKey: .id)
     try container.encode(isFinished, forKey: .isFinished)
     try container.encode(start, forKey: .start)
+    try container.encode(start_percent, forKey: .start_percent)
     try container.encode(strokeColor.hexString, forKey: .strokeColor)
     try container.encode(strokeWidth, forKey: .strokeWidth)
+    try container.encode(stroke_width_percent, forKey: .stroke_width_percent)
     try container.encode(segments, forKey: .segments)
     try container.encode(isEraser, forKey: .isEraser)
     if !transform.isIdentity {
@@ -137,7 +158,8 @@ public class PenShape: Shape, ShapeWithStrokeState, ShapeSelectable {
   }
 
   private func render(in context: CGContext, onlyLast: Bool = false) {
-    
+    self.compute_percents_if_necessary(ContextWidth: context.width, ContextHeight: context.height)
+
     for seg in self.segments {
       seg.compute_percents_if_necessary(ContextWidth: context.width, ContextHeight: context.height)
     }

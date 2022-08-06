@@ -15,7 +15,7 @@ public class EllipseShape:
 {
   private enum CodingKeys: String, CodingKey {
     case id, a, b, strokeColor, fillColor, strokeWidth, capStyle, joinStyle,
-    dashPhase, dashLengths, transform, type
+    dashPhase, dashLengths, transform, type, a_percent, b_percent, stroke_width_percent
   }
 
   public static let type: String = "Ellipse"
@@ -83,6 +83,11 @@ public class EllipseShape:
     joinStyle = CGLineJoin(rawValue: try values.decodeIfPresent(Int32.self, forKey: .joinStyle) ?? CGLineJoin.round.rawValue)!
     dashPhase = try values.decodeIfPresent(CGFloat.self, forKey: .dashPhase)
     dashLengths = try values.decodeIfPresent([CGFloat].self, forKey: .dashLengths)
+
+    a_percent = try values.decode(CGPoint.self, forKey: .a_percent)
+    b_percent = try values.decode(CGPoint.self, forKey: .b_percent)
+    stroke_width_percent = try values.decode(CGFloat.self, forKey: .stroke_width_percent)
+
   }
 
   public func encode(to encoder: Encoder) throws {
@@ -94,6 +99,9 @@ public class EllipseShape:
     try container.encode(strokeColor?.hexString, forKey: .strokeColor)
     try container.encode(fillColor?.hexString, forKey: .fillColor)
     try container.encode(strokeWidth, forKey: .strokeWidth)
+    try container.encode(a_percent, forKey: .a_percent)
+    try container.encode(b_percent, forKey: .b_percent)
+    try container.encode(stroke_width_percent, forKey: .stroke_width_percent)
 
     if !transform.isIdentity {
       try container.encode(transform, forKey: .transform)
