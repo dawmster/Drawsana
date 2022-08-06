@@ -270,17 +270,30 @@ class ViewController: UIViewController {
     }
   }
 
+  var reload_toggle: Bool = false
+  var drawing_json_data: Data = Data()
   @objc private func reload(_ sender: Any?) {
+    
     print("Serializing/deserializing...")
-    let encoder = JSONEncoder()
-    encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
-    let jsonData = try! encoder.encode(drawingView.drawing)
-    print(String(data: jsonData, encoding: .utf8)!)
-    drawingView.drawing = try! JSONDecoder().decode(
-      Drawing.self,
-      from: jsonData)
-    print(drawingView.drawing.shapes)
-    print("Done")
+    
+    if(reload_toggle == false){
+      let encoder = JSONEncoder()
+      encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
+      let jsonData = try! encoder.encode(drawingView.drawing)
+      drawing_json_data = jsonData
+      reload_toggle = true
+      drawingView.drawing = Drawing(size: CGSize(width: 320, height: 320))
+//      print(String(data: jsonData, encoding: .utf8)!)
+    }
+    else {
+      let jsonData = drawing_json_data
+      drawingView.drawing = try! JSONDecoder().decode(
+        Drawing.self,
+        from: jsonData)
+      reload_toggle = false
+//      print(drawingView.drawing.shapes)
+  //    print("Done")
+    }
   }
 
   /// Update button states to reflect undo stack
