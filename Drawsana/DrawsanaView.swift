@@ -392,6 +392,7 @@ public class DrawsanaView: UIView {
     selectionIndicatorView.frame = selectionBounds
     selectionIndicatorView.frame.origin = offset
     selectionIndicatorView.frame = selectionIndicatorView.frame.offsetBy(dx: shape.transform.translation.x, dy: shape.transform.translation.y)
+    selectionIndicatorView.transform = ShapeTransform(translation: offset+shape.transform.translation, rotation: shape.transform.rotation, scale:1.0).affineTransform
     
     selectionIndicatorView.isHidden = false
 
