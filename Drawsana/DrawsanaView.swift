@@ -406,6 +406,7 @@ public class DrawsanaView: UIView {
       }
     }
     reapplyLayerContents()
+    applySelectionViewState()
   }
 }
 
