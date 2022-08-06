@@ -374,17 +374,25 @@ public class DrawsanaView: UIView {
      to add `offset` from above with `shape.transform.translation` to arrive
      at the right final translation.
      */
-    selectionIndicatorView.transform = ShapeTransform(
-      translation: (
-        // figure out where the shape is in space
-        offset + shape.transform.translation +
-        // Account for the coordinate system being anchored in the middle
-        CGPoint(x: -bounds.size.width * selectionIndicatorAnchorPointOffset.x, y: -bounds.size.height * selectionIndicatorAnchorPointOffset.y) +
-        // We've just moved the CENTER of the selection view to the UPPER LEFT
-        // of the shape, so adjust by half the selection size:
-        CGPoint(x: selectionBounds.size.width / 2, y: selectionBounds.size.height / 2)),
-      rotation: shape.transform.rotation,
-      scale: shape.transform.scale).affineTransform
+    
+//    selectionIndicatorView.transform = ShapeTransform(
+//      translation: (
+//        // figure out where the shape is in space
+//        offset + shape.transform.translation +
+//        // Account for the coordinate system being anchored in the middle
+//        CGPoint(x: -bounds.size.width * selectionIndicatorAnchorPointOffset.x, y: -bounds.size.height * selectionIndicatorAnchorPointOffset.y) +
+//        // We've just moved the CENTER of the selection view to the UPPER LEFT
+//        // of the shape, so adjust by half the selection size:
+//        CGPoint(x: selectionBounds.size.width / 2, y: selectionBounds.size.height / 2)),
+//
+//      rotation: shape.transform.rotation,
+//      scale: shape.transform.scale).affineTransform
+    
+    selectionIndicatorView.bounds = selectionBounds
+    selectionIndicatorView.frame = selectionBounds
+    selectionIndicatorView.frame.origin = offset
+    selectionIndicatorView.frame = selectionIndicatorView.frame.offsetBy(dx: shape.transform.translation.x, dy: shape.transform.translation.y)
+    
     selectionIndicatorView.isHidden = false
 
     selectionIndicatorViewShapeLayer.frame = selectionIndicatorView.bounds
