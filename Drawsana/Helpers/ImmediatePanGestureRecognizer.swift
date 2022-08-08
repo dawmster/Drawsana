@@ -51,9 +51,22 @@ class ImmediatePanGestureRecognizer: UIGestureRecognizer {
     }
     return view.convert(lastPoint, to: view)
   }
+  
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-    guard trackedTouch == nil, let firstTouch = touches.first, let view = view else { return }
+    if(touches.count > 1){
+      if( state != .ended) {
+        state = .cancelled
+      }
+      self.cancelsTouchesInView = true
+      DispatchQueue.main.async {
+        self.reset()
+      }
+      self.view?.superview?.touchesBegan(touches, with: event)
+
+      return
+    }
+    guard trackedTouch == nil, let firstTouch = touches.first, let view = view, touches.count == 1 else { return }
     trackedTouch = firstTouch
     startPoint = firstTouch.location(in: view)
     lastPoint = startPoint
@@ -64,7 +77,19 @@ class ImmediatePanGestureRecognizer: UIGestureRecognizer {
   }
 
   override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
+    if(touches.count > 1) {
+      state = .cancelled
+      DispatchQueue.main.async {
+        self.reset()
+      }
+//      self.cancelsTouchesInView = fal
+//      self.view?.superview?.touchesBegan(touches, with: event)
+
+    }
+
+
     guard
+      touches.count == 1,
       state == .began || state == .changed,
       let view = view,
       let trackedTouch = trackedTouch,
@@ -79,6 +104,11 @@ class ImmediatePanGestureRecognizer: UIGestureRecognizer {
     lastPoint = trackedTouch.location(in: view)
     if (lastPoint - startPoint).length >= tapThreshold {
       hasExceededTapThreshold = true
+    }
+    else {
+      if( state != .changed){
+        return
+      }
     }
 
     state = .changed

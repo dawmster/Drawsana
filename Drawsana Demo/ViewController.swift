@@ -5,11 +5,12 @@
 //  Created by Steve Landey on 7/23/18.
 //  Copyright © 2018 Asana. All rights reserved.
 //
+//  Modifications by Mikolaj Dawidowski on 5th-8th August 2022
+//  Copyright © 2022 Mikolaj Dawidowski. All rights reserved.
 
 import UIKit
 import Drawsana
 import QuickLook
-
 /**
  Bare-bones demonstration of the Drawsana API. Drawsana does not provide its
  own UI, so this demo has a very simple one.
@@ -141,21 +142,40 @@ class ViewController: UIViewController {
     toolbarStackView.alignment = .fill
     view.addSubview(toolbarStackView)
 
-    imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.translatesAutoresizingMaskIntoConstraints = true
+    imageView.autoresizingMask = [.flexibleLeftMargin , .flexibleTopMargin]
     imageView.contentMode = .scaleAspectFit
     imageView.backgroundColor = .gray
-    view.addSubview(imageView)
+//    view.addSubview(imageView)
 
-    drawingView.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(drawingView)
+    drawingView.translatesAutoresizingMaskIntoConstraints = true
 
-    let imageAspectRatio = imageView.image!.size.width / imageView.image!.size.height
+    let scrv = Algo_Centering_ScrollView()
+    scrv.view_to_zoom_in_scroll_view = imageView
+    scrv.view_second = drawingView
+    scrv.addSubview(imageView)
+    scrv.addSubview(drawingView)
+    scrv.translatesAutoresizingMaskIntoConstraints = false
+//    scrv.addSubview(drawingView)
+    
+//    view.addSubview(drawingView)
+    view.addSubview(scrv)
+    NSLayoutConstraint.activate([
+      scrv.leftAnchor.constraint(equalTo: view.leftAnchor),
+      scrv.rightAnchor.constraint(equalTo: view.rightAnchor),
+      scrv.topAnchor.constraint(equalTo: view.topAnchor),
+      scrv.bottomAnchor.constraint(equalTo: toolbarStackView.topAnchor)
+
+    ])
+    
+
+//    let imageAspectRatio = imageView.image!.size.width / imageView.image!.size.height
 
     NSLayoutConstraint.activate([
       // imageView constrain to left/top/right
-      imageView.leftAnchor.constraint(equalTo: view.leftAnchor),
-      imageView.rightAnchor.constraint(equalTo: view.rightAnchor),
-      imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//      imageView.leftAnchor.constraint(equalTo: scrv.leftAnchor),
+//      imageView.rightAnchor.constraint(equalTo: scrv.rightAnchor),
+//      imageView.topAnchor.constraint(equalTo: scrv.safeAreaLayoutGuide.topAnchor),
 
       // toolbarStackView fill bottom
       toolbarStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -166,10 +186,13 @@ class ViewController: UIViewController {
       toolButton.widthAnchor.constraint(equalToConstant: 90),
 
       // imageView bottom -> toolbarStackView.top
-      imageView.bottomAnchor.constraint(equalTo: toolbarStackView.topAnchor),
+//      imageView.bottomAnchor.constraint(equalTo: toolbarStackView.topAnchor),
 
       // drawingView is centered in imageView, shares image's aspect ratio,
       // and doesn't expand past its frame
+      
+      /**** moved to ScrollView */
+      /*
       drawingView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
       drawingView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
       drawingView.widthAnchor.constraint(lessThanOrEqualTo: imageView.widthAnchor),
@@ -177,7 +200,8 @@ class ViewController: UIViewController {
       drawingView.widthAnchor.constraint(equalTo: drawingView.heightAnchor, multiplier: imageAspectRatio),
       drawingView.widthAnchor.constraint(equalTo: imageView.widthAnchor).withPriority(.defaultLow),
       drawingView.heightAnchor.constraint(equalTo: imageView.heightAnchor).withPriority(.defaultLow),
-
+       */
+    
       // Color buttons have constant size
       strokeColorButton.widthAnchor.constraint(equalToConstant: 30),
       strokeColorButton.heightAnchor.constraint(equalToConstant: 30),

@@ -5,6 +5,8 @@
 //  Created by Steve Landey on 7/23/18.
 //  Copyright © 2018 Asana. All rights reserved.
 //
+//  Modifications by Mikolaj Dawidowski on 5th-8th August 2022
+//  Copyright © 2022 Mikolaj Dawidowski. All rights reserved.
 
 import UIKit
 
@@ -206,8 +208,15 @@ public class DrawsanaView: UIView {
     selectionIndicatorView.layer.shadowOpacity = 1
     selectionIndicatorView.isHidden = true
 
-    let panGR = ImmediatePanGestureRecognizer(target: self, action: #selector(didPan(sender:)))
-    addGestureRecognizer(panGR)
+    panGR = ImmediatePanGestureRecognizer(target: self, action: #selector(didPan(sender:)))
+    
+    
+    addGestureRecognizer(panGR!)
+  }
+  var panGR: ImmediatePanGestureRecognizer?
+  
+  public override func willMove(toSuperview newSuperview: UIView?) {
+    panGR?.delegate = newSuperview as! UIGestureRecognizerDelegate
   }
 
   public override func layoutSubviews() {
@@ -269,7 +278,14 @@ public class DrawsanaView: UIView {
   }
 
   // MARK: Gesture recognizers
-
+  public override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    if gestureRecognizer.numberOfTouches == 1 {
+      return true
+    }
+    else {
+      return false
+    }
+  }
   @objc private func didPan(sender: ImmediatePanGestureRecognizer) {
     autoreleasepool { _didPan(sender: sender) }
   }
@@ -325,6 +341,7 @@ public class DrawsanaView: UIView {
 
     applyToolSettingsChanges()
   }
+  
 
   // MARK: Making stuff show up
 

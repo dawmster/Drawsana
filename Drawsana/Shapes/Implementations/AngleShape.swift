@@ -5,6 +5,8 @@
 //  Created by Thanh Vu on 5/3/19.
 //  Copyright © 2019 Asana. All rights reserved.
 //
+//  Modifications by Mikolaj Dawidowski on 5th-8th August 2022
+//  Copyright © 2022 Mikolaj Dawidowski. All rights reserved.
 
 import UIKit
 

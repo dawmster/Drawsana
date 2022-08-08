@@ -5,6 +5,8 @@
 //  Created by Madan Gupta on 24/12/18.
 //  Copyright © 2018 Asana. All rights reserved.
 //
+//  Modifications by Mikolaj Dawidowski on 5th-8th August 2022
+//  Copyright © 2022 Mikolaj Dawidowski. All rights reserved.
 
 import UIKit
 
