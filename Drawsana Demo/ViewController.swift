@@ -231,6 +231,48 @@ class ViewController: UIViewController {
   var savedImageURL: URL {
     return FileManager.default.temporaryDirectory.appendingPathComponent("drawsana_demo").appendingPathExtension("jpg")
   }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+      super.viewWillDisappear(animated)
+      if isBeingDismissed {
+          // TODO: Save image to property
+        
+        // or save in separate property as readonly, or write can trigger
+      }
+  }
+  @objc public var image: UIImage ? {
+    set {
+      imageView.image = newValue
+    }
+    get {
+      return imageView.image
+    }
+  }
+  @objc public var result : UIImage? {
+    set {
+      result = newValue
+    }
+    get{
+      let image = drawingView.render(over: imageView.image)
+      return image
+    }
+  }
+  @objc public var result_json: NSData? {
+    set {
+      let jsonDecoder = JSONDecoder()
+      let jsonData: Data = newValue! as Data
+      drawingView.drawing = try! jsonDecoder.decode(Drawing.self, from: jsonData)
+      
+    }
+    get {
+      let jsonEncoder = JSONEncoder()
+      //jsonEncoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+      let jsonData = try! jsonEncoder.encode(drawingView.drawing)
+      let jsonNSData = jsonData as NSData
+      return jsonNSData
+    }
+  }
+  
 
   /// Show rendered image in a separate view
   @objc private func viewFinalImage(_ sender: Any?) {
