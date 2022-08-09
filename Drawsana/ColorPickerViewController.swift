@@ -12,7 +12,7 @@ protocol ColorPickerViewControllerDelegate: AnyObject {
   func colorPickerViewControllerDidPick(colorIndex: Int, color: UIColor?, identifier: String)
 }
 
-class ColorPickerViewController: UIViewController {
+@objc class ColorPickerViewController: UIViewController {
   let colors: [UIColor?]
   weak var delegate: ColorPickerViewControllerDelegate?
   var identifier: String

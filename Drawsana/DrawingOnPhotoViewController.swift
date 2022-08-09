@@ -15,7 +15,7 @@ import QuickLook
  Bare-bones demonstration of the Drawsana API. Drawsana does not provide its
  own UI, so this demo has a very simple one.
  */
-class DrawingOnPhotoViewController: UIViewController {
+@objc class DrawingOnPhotoViewController: UIViewController {
   struct Constants {
     static let colors: [UIColor?] = [
       .black,

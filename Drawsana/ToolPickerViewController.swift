@@ -13,7 +13,7 @@ protocol ToolPickerViewControllerDelegate: AnyObject {
   func toolPickerViewControllerDidPick(tool: DrawingTool)
 }
 
-class ToolPickerViewController: UIViewController {
+@objc class ToolPickerViewController: UIViewController {
   let tools: [DrawingTool]
   weak var delegate: ToolPickerViewControllerDelegate?
 

@@ -15,5 +15,9 @@ FOUNDATION_EXPORT double AMDrawingViewVersionNumber;
 FOUNDATION_EXPORT const unsigned char AMDrawingViewVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <AMDrawingView/PublicHeader.h>
-
+#import "Algo_UIKit_Binding.h"
+#import "Algo_Controller_that_can_receive_data_from_AlgoEngine_protcol.h"
+#import "Algo_objective_c_utils.h"
+#import "Algo_UIKit_Binding.h"
+#import "Algo_Other_Important_UI_ObjC.h"
 
