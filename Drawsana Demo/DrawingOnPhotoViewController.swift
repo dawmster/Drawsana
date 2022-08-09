@@ -5,7 +5,7 @@
 //  Created by Steve Landey on 7/23/18.
 //  Copyright © 2018 Asana. All rights reserved.
 //
-//  Modifications by Mikolaj Dawidowski on 5th-8th August 2022
+//  Modifications by Mikolaj Dawidowski on 5th-9th August 2022
 //  Copyright © 2022 Mikolaj Dawidowski. All rights reserved.
 
 import UIKit
@@ -15,7 +15,7 @@ import QuickLook
  Bare-bones demonstration of the Drawsana API. Drawsana does not provide its
  own UI, so this demo has a very simple one.
  */
-class ViewController: UIViewController {
+class DrawingOnPhotoViewController: UIViewController {
   struct Constants {
     static let colors: [UIColor?] = [
       .black,
@@ -43,11 +43,11 @@ class ViewController: UIViewController {
     title: "View",
     style: .plain,
     target: self,
-    action: #selector(ViewController.viewFinalImage(_:)))
+    action: #selector(DrawingOnPhotoViewController.viewFinalImage(_:)))
   lazy var deleteButton = UIBarButtonItem(
     barButtonSystemItem: .trash,
     target: self,
-    action: #selector(ViewController.removeSelection(_:)))
+    action: #selector(DrawingOnPhotoViewController.removeSelection(_:)))
   let toolButton = UIButton(type: .custom)
   let imageView = UIImageView(image: UIImage(named: "demo"))
   let undoButton = UIButton()
@@ -116,22 +116,22 @@ class ViewController: UIViewController {
     redoButton.addTarget(drawingView.operationStack, action: #selector(DrawingOperationStack.redo), for: .touchUpInside)
 
     strokeColorButton.translatesAutoresizingMaskIntoConstraints = false
-    strokeColorButton.addTarget(self, action: #selector(ViewController.openStrokeColorMenu(_:)), for: .touchUpInside)
+    strokeColorButton.addTarget(self, action: #selector(DrawingOnPhotoViewController.openStrokeColorMenu(_:)), for: .touchUpInside)
     strokeColorButton.layer.borderColor = UIColor.white.cgColor
     strokeColorButton.layer.borderWidth = 0.5
 
     fillColorButton.translatesAutoresizingMaskIntoConstraints = false
-    fillColorButton.addTarget(self, action: #selector(ViewController.openFillColorMenu(_:)), for: .touchUpInside)
+    fillColorButton.addTarget(self, action: #selector(DrawingOnPhotoViewController.openFillColorMenu(_:)), for: .touchUpInside)
     fillColorButton.layer.borderColor = UIColor.white.cgColor
     fillColorButton.layer.borderWidth = 0.5
 
     strokeWidthButton.translatesAutoresizingMaskIntoConstraints = false
-    strokeWidthButton.addTarget(self, action: #selector(ViewController.cycleStrokeWidth(_:)), for: .touchUpInside)
+    strokeWidthButton.addTarget(self, action: #selector(DrawingOnPhotoViewController.cycleStrokeWidth(_:)), for: .touchUpInside)
     strokeWidthButton.layer.borderColor = UIColor.white.cgColor
     strokeWidthButton.layer.borderWidth = 0.5
 
     reloadButton.translatesAutoresizingMaskIntoConstraints = false
-    reloadButton.addTarget(self, action: #selector(ViewController.reload(_:)), for: .touchUpInside)
+    reloadButton.addTarget(self, action: #selector(DrawingOnPhotoViewController.reload(_:)), for: .touchUpInside)
     reloadButton.layer.borderColor = UIColor.white.cgColor
     reloadButton.layer.borderWidth = 0.5
     reloadButton.setTitle("🔁", for: .normal)
@@ -240,7 +240,7 @@ class ViewController: UIViewController {
         // or save in separate property as readonly, or write can trigger
       }
   }
-  @objc public var image: UIImage ? {
+  @objc public var image: UIImage? {
     set {
       imageView.image = newValue
     }
@@ -250,7 +250,6 @@ class ViewController: UIViewController {
   }
   @objc public var result : UIImage? {
     set {
-      result = newValue
     }
     get{
       let image = drawingView.render(over: imageView.image)
@@ -373,7 +372,7 @@ class ViewController: UIViewController {
   }
 }
 
-extension ViewController: ColorPickerViewControllerDelegate {
+extension DrawingOnPhotoViewController: ColorPickerViewControllerDelegate {
   func colorPickerViewControllerDidPick(colorIndex: Int, color: UIColor?, identifier: String) {
     switch identifier {
     case "stroke":
@@ -386,20 +385,20 @@ extension ViewController: ColorPickerViewControllerDelegate {
   }
 }
 
-extension ViewController: ToolPickerViewControllerDelegate {
+extension DrawingOnPhotoViewController: ToolPickerViewControllerDelegate {
   func toolPickerViewControllerDidPick(tool: DrawingTool) {
     drawingView.set(tool: tool)
     dismiss(animated: true, completion: nil)
   }
 }
 
-extension ViewController: UIPopoverPresentationControllerDelegate {
+extension DrawingOnPhotoViewController: UIPopoverPresentationControllerDelegate {
   func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
     return .none
   }
 }
 
-extension ViewController: DrawsanaViewDelegate {
+extension DrawingOnPhotoViewController: DrawsanaViewDelegate {
   /// When tool changes, update the UI
   func drawsanaView(_ drawsanaView: DrawsanaView, didSwitchTo tool: DrawingTool) {
     toolButton.setTitle(drawingView.tool?.name ?? "", for: .normal)
@@ -433,7 +432,7 @@ extension ViewController: DrawsanaViewDelegate {
   }
 }
 
-extension ViewController: SelectionToolDelegate {
+extension DrawingOnPhotoViewController: SelectionToolDelegate {
   /// When a shape is double-tapped by the selection tool, and it's text,
   /// begin editing the text
   func selectionToolDidTapOnAlreadySelectedShape(_ shape: ShapeSelectable) {
@@ -445,7 +444,7 @@ extension ViewController: SelectionToolDelegate {
   }
 }
 
-extension ViewController: TextToolDelegate {
+extension DrawingOnPhotoViewController: TextToolDelegate {
   /// Don't modify text point. In reality you probably do want to modify it to
   /// make sure it's not below the keyboard.
   func textToolPointForNewText(tappedPoint: CGPoint) -> CGPoint {
@@ -537,7 +536,7 @@ extension ViewController: TextToolDelegate {
 
 /// Implement `DrawingOperationStackDelegate` to keep the UI in sync with the
 /// operation stack
-extension ViewController: DrawingOperationStackDelegate {
+extension DrawingOnPhotoViewController: DrawingOperationStackDelegate {
   func drawingOperationStackDidUndo(_ operationStack: DrawingOperationStack, operation: DrawingOperation) {
     applyUndoViewState()
   }
@@ -551,7 +550,7 @@ extension ViewController: DrawingOperationStackDelegate {
   }
 }
 
-extension ViewController: QLPreviewControllerDataSource {
+extension DrawingOnPhotoViewController: QLPreviewControllerDataSource {
   func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
     return 1
   }

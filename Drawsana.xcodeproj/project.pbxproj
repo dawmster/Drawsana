@@ -43,7 +43,7 @@
 		37EB4EEA210649E100E10461 /* Drawsana.h in Headers */ = {isa = PBXBuildFile; fileRef = 37EB4EDC210649E100E10461 /* Drawsana.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37EB4EF4210649FC00E10461 /* DrawsanaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EB4EF3210649FC00E10461 /* DrawsanaView.swift */; };
 		37EB4EFD21064A5E00E10461 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EB4EFC21064A5E00E10461 /* AppDelegate.swift */; };
-		37EB4EFF21064A5E00E10461 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EB4EFE21064A5E00E10461 /* ViewController.swift */; };
+		37EB4EFF21064A5E00E10461 /* DrawingOnPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EB4EFE21064A5E00E10461 /* DrawingOnPhotoViewController.swift */; };
 		37EB4F0221064A5E00E10461 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37EB4F0021064A5E00E10461 /* Main.storyboard */; };
 		37EB4F0421064A6000E10461 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37EB4F0321064A6000E10461 /* Assets.xcassets */; };
 		37EB4F0721064A6000E10461 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37EB4F0521064A6000E10461 /* LaunchScreen.storyboard */; };
@@ -152,7 +152,7 @@
 		37EB4EF3210649FC00E10461 /* DrawsanaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsanaView.swift; sourceTree = "<group>"; };
 		37EB4EFA21064A5E00E10461 /* Drawsana Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Drawsana Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EB4EFC21064A5E00E10461 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		37EB4EFE21064A5E00E10461 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		37EB4EFE21064A5E00E10461 /* DrawingOnPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingOnPhotoViewController.swift; sourceTree = "<group>"; };
 		37EB4F0121064A5E00E10461 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		37EB4F0321064A6000E10461 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37EB4F0621064A6000E10461 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -366,7 +366,7 @@
 				D0C4916228A00BB100E0A02B /* Algo_UIKit_Binding.mm */,
 				D092A8CC289C1A3400F7878F /* Drawsana Demo.entitlements */,
 				37EB4EFC21064A5E00E10461 /* AppDelegate.swift */,
-				37EB4EFE21064A5E00E10461 /* ViewController.swift */,
+				37EB4EFE21064A5E00E10461 /* DrawingOnPhotoViewController.swift */,
 				372093CE21345862001A906E /* ColorPickerViewController.swift */,
 				372093D021345DB7001A906E /* ToolPickerViewController.swift */,
 				37EB4F0021064A5E00E10461 /* Main.storyboard */,
@@ -623,7 +623,7 @@
 				D0C4916B28A00BF300E0A02B /* Algo_Centering_ScrollView.swift in Sources */,
 				D0C4916428A00BB100E0A02B /* Algo_UIKit_Binding.mm in Sources */,
 				D0C4916828A00BD400E0A02B /* Algo_objective_c_utils.m in Sources */,
-				37EB4EFF21064A5E00E10461 /* ViewController.swift in Sources */,
+				37EB4EFF21064A5E00E10461 /* DrawingOnPhotoViewController.swift in Sources */,
 				37EB4EFD21064A5E00E10461 /* AppDelegate.swift in Sources */,
 				372093CF21345862001A906E /* ColorPickerViewController.swift in Sources */,
 			);
