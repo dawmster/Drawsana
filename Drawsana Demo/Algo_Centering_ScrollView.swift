@@ -137,7 +137,7 @@ public class Algo_Centering_ScrollView: UIScrollView, UIScrollViewDelegate,Algo_
     
     private var algo_old_size:CGSize?
     public func algo_layout_subviews(){
-        if  let myimg = self.view_to_zoom_in_scroll_view , let second_view = view_second, keep_centered_if_smaller==true, self.single_fire == false {
+        if  let myimg = self.view_to_zoom_in_scroll_view , keep_centered_if_smaller==true, self.single_fire == false {
         //            UIView.performWithoutAnimation {
                         
                     
@@ -180,8 +180,8 @@ public class Algo_Centering_ScrollView: UIScrollView, UIScrollViewDelegate,Algo_
           
           myimg.frame.origin.x = 0.0
           myimg.frame.origin.y = CGFloat(0.0)
-          second_view.frame = myimg.frame
-          second_view.bounds = myimg.bounds
+          view_second?.frame = myimg.frame
+          view_second?.bounds = myimg.bounds
 
                         self.contentSize = myimg.frame.size
 
