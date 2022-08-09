@@ -17,7 +17,7 @@ public class RectShape:
 {
   private enum CodingKeys: String, CodingKey {
     case id, a, b, strokeColor, fillColor, strokeWidth, capStyle, joinStyle,
-    dashPhase, dashLengths, transform, type, a_percent, b_percent, stroke_width_percent
+    dashPhase, dashLengths, transform, type, a_percent, b_percent, stroke_width_percent, transform_translation_percent
   }
   
   public static let type: String = "Rectangle"
@@ -35,7 +35,12 @@ public class RectShape:
   public var joinStyle: CGLineJoin = .round
   public var dashPhase: CGFloat?
   public var dashLengths: [CGFloat]?
-  public var transform: ShapeTransform = .identity
+  public var transform: ShapeTransform = .identity {
+    didSet {
+      transform_translation_percent = .zero
+    }
+  }
+  public var transform_translation_percent: CGPoint = .zero
 
   public func compute_percents_if_necessary( ContextWidth: Int , ContextHeight: Int){
     let context_width = CGFloat(ContextWidth)
@@ -43,6 +48,21 @@ public class RectShape:
     if(a_percent == .zero){ self.a_percent = CGPoint(x: a.x/context_width, y: a.y/context_height ) }
     if(b_percent == .zero){ b_percent = CGPoint(x: b.x/context_width, y: b.y/context_height ) }
     if(stroke_width_percent == 0.0 ){ stroke_width_percent = strokeWidth/context_width }
+    
+    if( transform_translation_percent == .zero &&  transform.translation != .zero ){
+      transform_translation_percent.x = transform.translation.x / context_width
+      transform_translation_percent.y = transform.translation.y / context_height
+    }
+    if( transform_translation_percent != .zero){
+      let local_transform = transform_translation_percent
+      
+      transform.translation.x = local_transform.x * context_width
+      transform.translation.y = local_transform.y * context_height
+      
+      transform_translation_percent = local_transform
+    }
+    
+    
     
     let local_a = a_percent
     let local_b = b_percent
@@ -86,6 +106,8 @@ public class RectShape:
     a_percent = try values.decode(CGPoint.self, forKey: .a_percent)
     b_percent = try values.decode(CGPoint.self, forKey: .b_percent)
     stroke_width_percent = try values.decode(CGFloat.self, forKey: .stroke_width_percent)
+    
+    transform_translation_percent = try values.decode(CGPoint.self, forKey: .transform_translation_percent)
   }
 
   public func encode(to encoder: Encoder) throws {
@@ -104,6 +126,8 @@ public class RectShape:
     if !transform.isIdentity {
       try container.encode(transform, forKey: .transform)
     }
+    try container.encode(transform_translation_percent, forKey: .transform_translation_percent)
+
 
     if capStyle != .round {
       try container.encode(capStyle.rawValue, forKey: .capStyle)

@@ -216,7 +216,8 @@ public class DrawsanaView: UIView {
   var panGR: ImmediatePanGestureRecognizer?
   
   public override func willMove(toSuperview newSuperview: UIView?) {
-    panGR?.delegate = newSuperview as! UIGestureRecognizerDelegate
+    guard let gest_delegate = newSuperview as? UIGestureRecognizerDelegate else { return }
+    panGR?.delegate = gest_delegate
   }
 
   public override func layoutSubviews() {
