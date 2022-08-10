@@ -235,8 +235,8 @@ import QuickLook
   override func viewWillDisappear(_ animated: Bool) {
       super.viewWillDisappear(animated)
       if isBeingDismissed {
-          // TODO: Save image to property
-        
+        final_image_when_closing = self.result_image
+        final_data_when_closing = self.drawing_data
         // or save in separate property as readonly, or write can trigger
       }
   }
@@ -248,15 +248,18 @@ import QuickLook
       return imageView.image
     }
   }
-  @objc public var result : UIImage? {
+  @objc public var final_image_when_closing: UIImage? // this can be observed to get result when VC will get dismissed
+  @objc public var final_data_when_closing: NSData? // this can be observed to get result when VC will get dismissed
+  @objc public var result_image : UIImage? {
     set {
+      final_image_when_closing = drawingView.render(over: imageView.image)
     }
     get{
       let image = drawingView.render(over: imageView.image)
       return image
     }
   }
-  @objc public var result_json: NSData? {
+  @objc public var drawing_data: NSData? {
     set {
       let jsonDecoder = JSONDecoder()
       let jsonData: Data = newValue! as Data
