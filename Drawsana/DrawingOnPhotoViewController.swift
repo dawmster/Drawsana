@@ -261,6 +261,45 @@ import QuickLook
         // or save in separate property as readonly, or write can trigger
       }
   }
+  @objc public var object_with_image: NSObject? {
+    didSet {
+      
+      if let obj = object_with_image , let name_KP = name_image as? String {
+        let _img_data = obj.value(forKeyPath: name_KP)
+        if let img_data = _img_data, img_data is Data{
+          let img = UIImage(data: img_data as! Data)
+          imageView.image = img
+        }
+      } //end if
+      if let obj = object_with_image, name_data != nil, let name_KP = name_data as? String {
+        let json_obj = obj.value(forKeyPath: name_KP as String)
+        if let json_data = json_obj as? NSData {
+          self.drawing_data = json_data
+        }
+      } //end if
+    } // end didSet
+  }
+  @objc public var name_image: NSString? {
+    didSet {
+      if let obj = object_with_image , let name_KP = name_image as? String {
+        let _img_data = obj.value(forKeyPath: name_KP)
+        if let img_data = _img_data, img_data is Data{
+          let img = UIImage(data: img_data as! Data)
+          imageView.image = img
+        }
+      } //end if
+    } //end didSet
+  }
+  @objc public var name_data: NSString? {
+    didSet {
+      if let obj = object_with_image, name_data != nil, let name_KP = name_data as? String {
+        let json_obj = obj.value(forKeyPath: name_KP as String)
+        if let json_data = json_obj as? NSData {
+          self.drawing_data = json_data
+        }
+      } //end if
+    }//end didSet
+  }
   @objc public var image: UIImage? {
     set {
       imageView.image = newValue
