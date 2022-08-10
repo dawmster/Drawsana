@@ -250,9 +250,14 @@ import QuickLook
   
   override func viewWillDisappear(_ animated: Bool) {
       super.viewWillDisappear(animated)
-      if isBeingDismissed {
+      if isBeingDismissed || isMovingFromParent{
         final_image_when_closing = self.result_image
         final_data_when_closing = self.drawing_data
+        
+        if let name_KP = name_data, let obj = object_with_image {
+          obj.setValue(final_data_when_closing, forKeyPath: name_KP as String)
+        } //end if
+        
         // or save in separate property as readonly, or write can trigger
       }
   }
