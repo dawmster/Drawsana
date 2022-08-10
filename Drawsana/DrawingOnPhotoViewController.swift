@@ -39,15 +39,17 @@ import QuickLook
     return drawingView
   }()
 
-  lazy var viewFinalImageButton = UIBarButtonItem(
-    title: "View",
-    style: .plain,
-    target: self,
-    action: #selector(DrawingOnPhotoViewController.viewFinalImage(_:)))
-  lazy var deleteButton = UIBarButtonItem(
-    barButtonSystemItem: .trash,
-    target: self,
-    action: #selector(DrawingOnPhotoViewController.removeSelection(_:)))
+  lazy var viewFinalImageButton = UIButton()
+//    title: "View",
+//    style: .plain,
+//    target: self,
+//    action: #selector(DrawingOnPhotoViewController.viewFinalImage(_:)))
+  let deleteButton = UIButton()
+  
+//  lazy var deleteButton = UIBarButtonItem(
+//    barButtonSystemItem: .trash,
+//    target: self,
+//    action: #selector(DrawingOnPhotoViewController.removeSelection(_:)))
   let toolButton = UIButton(type: .custom)
   let imageView = UIImageView(image: UIImage(named: "demo"))
   let undoButton = UIButton()
@@ -65,6 +67,8 @@ import QuickLook
       strokeWidthButton,
       reloadButton,
       toolButton,
+      deleteButton,
+      viewFinalImageButton
     ])
   }()
 
@@ -102,6 +106,18 @@ import QuickLook
   override func loadView() {
     self.view = UIView()
 
+    deleteButton.translatesAutoresizingMaskIntoConstraints = false
+    deleteButton.setTitle("􀈒", for: .normal)
+    deleteButton.addTarget( self, action: #selector(DrawingOnPhotoViewController.removeSelection(_:)), for: .touchUpInside)
+    
+    viewFinalImageButton.translatesAutoresizingMaskIntoConstraints = false
+    viewFinalImageButton.setTitle("􁅆", for: .normal)
+    viewFinalImageButton.addTarget( self, action: #selector(DrawingOnPhotoViewController.viewFinalImage(_:)), for: .touchUpInside)
+ 
+    
+    
+    toolButton.addTarget(self, action: #selector(openToolMenu(_:)), for: .touchUpInside)
+    
     toolButton.translatesAutoresizingMaskIntoConstraints = false
     toolButton.setTitle("No Tool", for: .normal)
     toolButton.addTarget(self, action: #selector(openToolMenu(_:)), for: .touchUpInside)
@@ -134,7 +150,7 @@ import QuickLook
     reloadButton.addTarget(self, action: #selector(DrawingOnPhotoViewController.reload(_:)), for: .touchUpInside)
     reloadButton.layer.borderColor = UIColor.white.cgColor
     reloadButton.layer.borderWidth = 0.5
-    reloadButton.setTitle("🔁", for: .normal)
+    reloadButton.setTitle("􀌢", for: .normal)
 
     toolbarStackView.translatesAutoresizingMaskIntoConstraints = false
     toolbarStackView.axis = .horizontal
@@ -216,8 +232,8 @@ import QuickLook
     // Better error reporting in dev
     Drawing.debugSerialization = true
 
-    navigationItem.leftBarButtonItem = deleteButton
-    navigationItem.rightBarButtonItem = viewFinalImageButton
+//    navigationItem.leftBarButtonItem = deleteButton
+//    navigationItem.rightBarButtonItem = viewFinalImageButton
 
     // Set initial tool to whatever `toolIndex` says
     drawingView.set(tool: tools[0])
