@@ -3,12 +3,14 @@
 //  AlgoEngine_iOS
 //
 //  Created by mikolaj on 03/10/2019.
+//  Updated in 8/2022
 //  Copyright © 2022 Mikołaj Dawidowski. All rights reserved.
 //
 // how to USE see Note/2019-10-03 Centering ScrollView.txt
 import Foundation
 
-public class Algo_Centering_ScrollView: UIScrollView, UIScrollViewDelegate,Algo_Other_Important_UI_Object, UIGestureRecognizerDelegate {
+@IBDesignable
+@objc public class Algo_Centering_ScrollView: UIScrollView, UIScrollViewDelegate,Algo_Other_Important_UI_Object, UIGestureRecognizerDelegate {
     private var binding_object = Algo_Binding()
     
     //HUGE leak fixed - Algo_Centering_ScrollView - stopped observing and removing
@@ -19,14 +21,13 @@ public class Algo_Centering_ScrollView: UIScrollView, UIScrollViewDelegate,Algo_
             self.binding_object.observed_nsobject = nil
             self.view_to_zoom_in_scroll_view = nil
             self.binding_object.value_changed = nil
-          
-          
             
             return
         }
         
     }
-   public weak var view_second: UIView?
+    
+    @IBInspectable public weak var view_second: UIView?
     @IBOutlet weak var view_to_zoom_in_scroll_view:UIImageView? {
         didSet {
             self.binding_object.stop_observing()
@@ -178,10 +179,10 @@ public class Algo_Centering_ScrollView: UIScrollView, UIScrollViewDelegate,Algo_
                         myimg.frame.size.width = img_size.width * initialZoom
                         myimg.frame.size.height = img_size.height * initialZoom
           
-          myimg.frame.origin.x = 0.0
-          myimg.frame.origin.y = CGFloat(0.0)
-          view_second?.frame = myimg.frame
-          view_second?.bounds = myimg.bounds
+                        myimg.frame.origin.x = 0.0
+                        myimg.frame.origin.y = CGFloat(0.0)
+                        view_second?.frame = myimg.frame
+                        view_second?.bounds = myimg.bounds
 
                         self.contentSize = myimg.frame.size
 
@@ -245,9 +246,9 @@ public class Algo_Centering_ScrollView: UIScrollView, UIScrollViewDelegate,Algo_
         else{
             algo_layout_subviews()
         }
-      if( view_second?.frame != view_to_zoom_in_scroll_view?.frame){
-        view_second?.frame = view_to_zoom_in_scroll_view!.frame
-      }
+        if( view_second?.frame != view_to_zoom_in_scroll_view?.frame){
+          view_second?.frame = view_to_zoom_in_scroll_view!.frame
+        }
         
 
             //this is execute when image changes
