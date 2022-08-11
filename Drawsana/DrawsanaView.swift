@@ -28,9 +28,29 @@ public protocol DrawsanaViewDelegate: AnyObject {
 /**
  Add this view to your view hierarchy to get going with Drawsana!
  */
-public class DrawsanaView: UIView {
+@objc public class DrawsanaView: UIView {
   // MARK: Public API
 
+
+  
+  @objc public var drawing_data: NSData? {
+    set {
+      if let nVal = newValue {
+        let jsonDecoder = JSONDecoder()
+        let jsonData: Data = nVal as Data
+        self.drawing = try! jsonDecoder.decode(Drawing.self, from: jsonData)
+      }
+      
+    }
+    get {
+      let jsonEncoder = JSONEncoder()
+      //jsonEncoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+      let jsonData = try! jsonEncoder.encode(self.drawing)
+      let jsonNSData = jsonData as NSData
+      return jsonNSData
+    }
+  }
+  
   public weak var delegate: DrawsanaViewDelegate?
 
   /// Currently active tool
@@ -155,7 +175,7 @@ public class DrawsanaView: UIView {
     drawing.delegate = self
     toolSettings.delegate = self
     userSettings.delegate = self
-    isUserInteractionEnabled = true
+//    isUserInteractionEnabled = true
     clipsToBounds = true
 
     layer.actions = [
