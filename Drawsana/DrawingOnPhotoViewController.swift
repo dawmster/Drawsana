@@ -251,12 +251,43 @@ import QuickLook
   override func viewWillDisappear(_ animated: Bool) {
       super.viewWillDisappear(animated)
       if isBeingDismissed || isMovingFromParent{
-        final_image_when_closing = self.result_image
+//        final_image_when_closing = self.result_image
         final_data_when_closing = self.drawing_data
         
         if let name_KP = name_data, let obj = object_with_image {
           obj.setValue(final_data_when_closing, forKeyPath: name_KP as String)
+          
+          let date = NSDate.init()
+          obj.setValue(date, forKeyPath: "fotka.cloudkit.modificationDate")
+          obj.setValue(true, forKeyPath: "fotka.cloudkit.changes_local")
+          let _pozycja = obj.value(forKeyPath: "pozycja")
+          if let pozycja = _pozycja as? NSNumber {
+            let nowa_pozycja = pozycja.doubleValue + 0.0001
+            let ns_pozycja: NSNumber = NSNumber.init(value: nowa_pozycja)
+            obj.setValue(ns_pozycja, forKeyPath: "pozycja")
+            obj.setValue(pozycja, forKeyPath: "pozycja")
+          }
         } //end if
+        
+//        if let name_KP = name_image as? String, let obj = object_with_image,
+//        let image = final_image_when_closing,
+//        let data = image.jpegData(compressionQuality: 0.75)
+//        {
+//          obj.setValue(data, forKeyPath: name_KP)
+//
+//          let date = NSDate.init()
+//
+//          obj.setValue(date, forKeyPath: "fotka.cloudkit.modificationDate")
+//          obj.setValue(true, forKeyPath: "fotka.cloudkit.changes_local")
+//          let _pozycja = obj.value(forKeyPath: "pozycja")
+//          if let pozycja = _pozycja as? NSNumber {
+//            let nowa_pozycja = pozycja.doubleValue + 0.0001
+//            let ns_pozycja: NSNumber = NSNumber.init(value: nowa_pozycja)
+//            obj.setValue(ns_pozycja, forKeyPath: "pozycja")
+//            obj.setValue(pozycja, forKeyPath: "pozycja")
+//          }
+//        }
+
         
         // or save in separate property as readonly, or write can trigger
       }
@@ -321,10 +352,11 @@ import QuickLook
   }
   @objc public var drawing_data: NSData? {
     set {
-      let jsonDecoder = JSONDecoder()
-      let jsonData: Data = newValue! as Data
-      drawingView.drawing = try! jsonDecoder.decode(Drawing.self, from: jsonData)
-      
+      if let nVal = newValue{
+        let jsonDecoder = JSONDecoder()
+        let jsonData: Data = nVal as Data
+        drawingView.drawing = try! jsonDecoder.decode(Drawing.self, from: jsonData)
+      }
     }
     get {
       let jsonEncoder = JSONEncoder()
