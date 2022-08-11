@@ -9,8 +9,8 @@
 //  Copyright © 2022 Mikolaj Dawidowski. All rights reserved.
 
 import UIKit
-import Drawsana
 import QuickLook
+import CoreData
 /**
  Bare-bones demonstration of the Drawsana API. Drawsana does not provide its
  own UI, so this demo has a very simple one.
@@ -44,6 +44,8 @@ import QuickLook
 //    style: .plain,
 //    target: self,
 //    action: #selector(DrawingOnPhotoViewController.viewFinalImage(_:)))
+  let dismissButton = UIButton(type:.custom)
+
   let deleteButton = UIButton()
   
 //  lazy var deleteButton = UIBarButtonItem(
@@ -53,7 +55,7 @@ import QuickLook
   let toolButton = UIButton(type: .custom)
   let imageView = UIImageView(image: UIImage(named: "demo"))
   let undoButton = UIButton()
-  let redoButton = UIButton()
+  let redoButton = UIButton(type:.custom)
   let strokeColorButton = UIButton()
   let fillColorButton = UIButton()
   let strokeWidthButton = UIButton()
@@ -65,10 +67,10 @@ import QuickLook
       strokeColorButton,
       fillColorButton,
       strokeWidthButton,
-      reloadButton,
+//      reloadButton,
       toolButton,
-      deleteButton,
-      viewFinalImageButton
+      deleteButton
+//      viewFinalImageButton
     ])
   }()
 
@@ -107,8 +109,10 @@ import QuickLook
     self.view = UIView()
 
     deleteButton.translatesAutoresizingMaskIntoConstraints = false
-    deleteButton.setTitle("􀈒", for: .normal)
+//    deleteButton.setTitle("􀈒", for: .normal)
+    deleteButton.setImage(UIImage(systemName: "trash"), for: .normal)
     deleteButton.addTarget( self, action: #selector(DrawingOnPhotoViewController.removeSelection(_:)), for: .touchUpInside)
+    deleteButton.tintColor = UIColor.white
     
     viewFinalImageButton.translatesAutoresizingMaskIntoConstraints = false
     viewFinalImageButton.setTitle("􁅆", for: .normal)
@@ -150,8 +154,19 @@ import QuickLook
     reloadButton.addTarget(self, action: #selector(DrawingOnPhotoViewController.reload(_:)), for: .touchUpInside)
     reloadButton.layer.borderColor = UIColor.white.cgColor
     reloadButton.layer.borderWidth = 0.5
-    reloadButton.setTitle("􀌢", for: .normal)
+    reloadButton.tintColor = UIColor.white
+//    reloadButton.setTitle("􀌢", for: .normal)
+    reloadButton.setImage(UIImage(systemName: "arrow.counterclockwise.circle"), for: .normal)
+    
 
+    dismissButton.translatesAutoresizingMaskIntoConstraints = false
+    dismissButton.addTarget(self, action: #selector(DrawingOnPhotoViewController.go_back(_:)), for: .touchUpInside)
+    dismissButton.tintColor = UIColor.white
+    reloadButton.layer.borderColor = UIColor.white.cgColor
+    reloadButton.layer.borderWidth = 0.5
+    dismissButton.setImage(UIImage(systemName: "backward"), for: .normal)
+//    dismissButton.buttonType = .close
+    
     toolbarStackView.translatesAutoresizingMaskIntoConstraints = false
     toolbarStackView.axis = .horizontal
     toolbarStackView.distribution = .equalSpacing
@@ -176,6 +191,7 @@ import QuickLook
     
 //    view.addSubview(drawingView)
     view.addSubview(scrv)
+    view.addSubview(dismissButton)
     NSLayoutConstraint.activate([
       scrv.leftAnchor.constraint(equalTo: view.leftAnchor),
       scrv.rightAnchor.constraint(equalTo: view.rightAnchor),
@@ -194,6 +210,10 @@ import QuickLook
 //      imageView.topAnchor.constraint(equalTo: scrv.safeAreaLayoutGuide.topAnchor),
 
       // toolbarStackView fill bottom
+      dismissButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+      dismissButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
+      dismissButton.widthAnchor.constraint(equalToConstant: 40),
+      dismissButton.heightAnchor.constraint(equalToConstant: 40),
       toolbarStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
       toolbarStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10),
       toolbarStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10),
@@ -245,7 +265,9 @@ import QuickLook
   }
 
   var savedImageURL: URL {
-    return FileManager.default.temporaryDirectory.appendingPathComponent("drawsana_demo").appendingPathExtension("jpg")
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+    return documentsDirectory.appendingPathComponent("drawsana_demo").appendingPathExtension("jpg")
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -266,6 +288,11 @@ import QuickLook
             let ns_pozycja: NSNumber = NSNumber.init(value: nowa_pozycja)
             obj.setValue(ns_pozycja, forKeyPath: "pozycja")
             obj.setValue(pozycja, forKeyPath: "pozycja")
+          }
+          if let nsmanobj = object_with_image as? NSManagedObject {
+            if let context = nsmanobj.managedObjectContext {
+              try? context.save()
+            }
           }
         } //end if
         
@@ -385,7 +412,8 @@ import QuickLook
       let data = image.jpegData(compressionQuality: 0.75),
       (try? data.write(to: savedImageURL)) != nil else
     {
-      assert(false, "Can't create or save image")
+
+//      assert(false, "Can't create or save image")
       return
     }
     let vc = QLPreviewController(nibName: nil, bundle: nil)
@@ -430,10 +458,15 @@ import QuickLook
     }
   }
 
+  @objc private func go_back(_ sender:Any?){
+//    self.dismiss(animated: true)
+    self.navigationController?.popViewController(animated: true)
+  }
   var reload_toggle: Bool = false
   var drawing_json_data: Data = Data()
   @objc private func reload(_ sender: Any?) {
-    
+    drawing_data = NSData()
+    return
     print("Serializing/deserializing...")
     
     if(reload_toggle == false){
