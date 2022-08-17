@@ -459,8 +459,12 @@ import CoreData
   }
 
   @objc private func go_back(_ sender:Any?){
-//    self.dismiss(animated: true)
-    self.navigationController?.popViewController(animated: true)
+    if let navC = self.navigationController {
+      navC.popViewController(animated: true)
+    }
+    else {
+      self.performSegue(withIdentifier: "my_unwind_action", sender: self)
+    }
   }
   var reload_toggle: Bool = false
   var drawing_json_data: Data = Data()
