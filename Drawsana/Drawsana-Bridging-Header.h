@@ -6,7 +6,7 @@
 //  Copyright © Mikolaj Dawidowski All rights reserved.
 //
 
-#import "Algo_Other_Important_UI_ObjC.h"
-#import "Algo_objective_c_utils.h"
-#import "Algo_UIKit_Binding.h"
+#import "AlgoEngine_iOS/Algo_Other_Important_UI_ObjC.h"
+#import "AlgoEngine_iOS/Algo_objective_c_utils.h"
+#import "AlgoEngine_iOS/Algo_UIKit_Binding.h"
 

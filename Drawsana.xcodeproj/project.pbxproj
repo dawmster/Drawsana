@@ -47,17 +47,14 @@
 		37EB4F1A21064A8100E10461 /* Drawsana.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EB4ED9210649E100E10461 /* Drawsana.framework */; };
 		37EB4F1B21064A8100E10461 /* Drawsana.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37EB4ED9210649E100E10461 /* Drawsana.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D024467821DA1ED000E431C8 /* StarTool_PentagonTool_TriangleTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D024467721DA1ED000E431C8 /* StarTool_PentagonTool_TriangleTool.swift */; };
+		D037C2FB28AD44FC00E9EA8E /* AlgoEngine_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D037C2FA28AD44FC00E9EA8E /* AlgoEngine_iOS.framework */; };
+		D037C2FF28AD47D800E9EA8E /* AlgoEngine_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D037C2FE28AD47D800E9EA8E /* AlgoEngine_iOS.framework */; };
+		D037C30028AD47D900E9EA8E /* AlgoEngine_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D037C2FE28AD47D800E9EA8E /* AlgoEngine_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D095A03328A312F3009855E3 /* DrawingOnPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EB4EFE21064A5E00E10461 /* DrawingOnPhotoViewController.swift */; };
 		D095A03428A312F6009855E3 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372093CE21345862001A906E /* ColorPickerViewController.swift */; };
 		D095A03528A312F8009855E3 /* ToolPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372093D021345DB7001A906E /* ToolPickerViewController.swift */; };
 		D095A03628A31307009855E3 /* Algo_Centering_ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C4916928A00BF300E0A02B /* Algo_Centering_ScrollView.swift */; };
-		D095A03728A31310009855E3 /* Algo_objective_c_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C4916528A00BD400E0A02B /* Algo_objective_c_utils.m */; };
-		D095A03828A31313009855E3 /* Algo_UIKit_Binding.mm in Sources */ = {isa = PBXBuildFile; fileRef = D0C4916228A00BB100E0A02B /* Algo_UIKit_Binding.mm */; };
 		D095A03A28A31370009855E3 /* Drawsana-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = D095A03928A31370009855E3 /* Drawsana-Bridging-Header.h */; };
-		D095A03B28A31649009855E3 /* Algo_Controller_that_can_receive_data_from_AlgoEngine_protcol.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C4916D28A00DE000E0A02B /* Algo_Controller_that_can_receive_data_from_AlgoEngine_protcol.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D095A03C28A3164C009855E3 /* Algo_Other_Important_UI_ObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C4916C28A00D9000E0A02B /* Algo_Other_Important_UI_ObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D095A03D28A3164E009855E3 /* Algo_objective_c_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C4916628A00BD400E0A02B /* Algo_objective_c_utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D095A03E28A31650009855E3 /* Algo_UIKit_Binding.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C4916128A00BB100E0A02B /* Algo_UIKit_Binding.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0E97E8321D0D3BA007722D7 /* StarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E97E8221D0D3BA007722D7 /* StarShape.swift */; };
 		D0E97E8521D0DD90007722D7 /* NgonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E97E8421D0DD90007722D7 /* NgonShape.swift */; };
 		D0F3B43D21D34F4000701BB4 /* CGFloat+DrawsanaExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F3B43C21D34F4000701BB4 /* CGFloat+DrawsanaExtensions.swift */; };
@@ -91,6 +88,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				37EB4F1B21064A8100E10461 /* Drawsana.framework in Embed Frameworks */,
+				D037C30028AD47D900E9EA8E /* AlgoEngine_iOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,17 +144,13 @@
 		37EB4F0621064A6000E10461 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		37EB4F0821064A6000E10461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D024467721DA1ED000E431C8 /* StarTool_PentagonTool_TriangleTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarTool_PentagonTool_TriangleTool.swift; sourceTree = "<group>"; };
+		D037C2FA28AD44FC00E9EA8E /* AlgoEngine_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlgoEngine_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D037C2FE28AD47D800E9EA8E /* AlgoEngine_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlgoEngine_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D092A8CC289C1A3400F7878F /* Drawsana Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Drawsana Demo.entitlements"; sourceTree = "<group>"; };
 		D095A03928A31370009855E3 /* Drawsana-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Drawsana-Bridging-Header.h"; sourceTree = "<group>"; };
 		D0C4915F28A00BB000E0A02B /* DrawsanaTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DrawsanaTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		D0C4916028A00BB000E0A02B /* Drawsana Demo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Drawsana Demo-Bridging-Header.h"; sourceTree = "<group>"; };
-		D0C4916128A00BB100E0A02B /* Algo_UIKit_Binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Algo_UIKit_Binding.h; sourceTree = "<group>"; };
-		D0C4916228A00BB100E0A02B /* Algo_UIKit_Binding.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Algo_UIKit_Binding.mm; sourceTree = "<group>"; };
-		D0C4916528A00BD400E0A02B /* Algo_objective_c_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Algo_objective_c_utils.m; sourceTree = "<group>"; };
-		D0C4916628A00BD400E0A02B /* Algo_objective_c_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Algo_objective_c_utils.h; sourceTree = "<group>"; };
 		D0C4916928A00BF300E0A02B /* Algo_Centering_ScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Algo_Centering_ScrollView.swift; sourceTree = "<group>"; };
-		D0C4916C28A00D9000E0A02B /* Algo_Other_Important_UI_ObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Algo_Other_Important_UI_ObjC.h; sourceTree = "<group>"; };
-		D0C4916D28A00DE000E0A02B /* Algo_Controller_that_can_receive_data_from_AlgoEngine_protcol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Algo_Controller_that_can_receive_data_from_AlgoEngine_protcol.h; sourceTree = "<group>"; };
 		D0E97E8221D0D3BA007722D7 /* StarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarShape.swift; sourceTree = "<group>"; };
 		D0E97E8421D0DD90007722D7 /* NgonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NgonShape.swift; sourceTree = "<group>"; };
 		D0F3B43C21D34F4000701BB4 /* CGFloat+DrawsanaExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+DrawsanaExtensions.swift"; sourceTree = "<group>"; };
@@ -170,6 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D037C2FB28AD44FC00E9EA8E /* AlgoEngine_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37EB4F1A21064A8100E10461 /* Drawsana.framework in Frameworks */,
+				D037C2FF28AD47D800E9EA8E /* AlgoEngine_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,12 +326,6 @@
 				372093CE21345862001A906E /* ColorPickerViewController.swift */,
 				372093D021345DB7001A906E /* ToolPickerViewController.swift */,
 				D0C4916928A00BF300E0A02B /* Algo_Centering_ScrollView.swift */,
-				D0C4916D28A00DE000E0A02B /* Algo_Controller_that_can_receive_data_from_AlgoEngine_protcol.h */,
-				D0C4916C28A00D9000E0A02B /* Algo_Other_Important_UI_ObjC.h */,
-				D0C4916628A00BD400E0A02B /* Algo_objective_c_utils.h */,
-				D0C4916528A00BD400E0A02B /* Algo_objective_c_utils.m */,
-				D0C4916128A00BB100E0A02B /* Algo_UIKit_Binding.h */,
-				D0C4916228A00BB100E0A02B /* Algo_UIKit_Binding.mm */,
 				376229882113ADEA0034D0E3 /* Data model */,
 				376229842113ADB30034D0E3 /* Helpers */,
 				3762296F2113AA4C0034D0E3 /* Shapes */,
@@ -371,6 +361,8 @@
 		D092A8D0289D041A00F7878F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D037C2FE28AD47D800E9EA8E /* AlgoEngine_iOS.framework */,
+				D037C2FA28AD44FC00E9EA8E /* AlgoEngine_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -383,10 +375,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D095A03A28A31370009855E3 /* Drawsana-Bridging-Header.h in Headers */,
-				D095A03C28A3164C009855E3 /* Algo_Other_Important_UI_ObjC.h in Headers */,
-				D095A03E28A31650009855E3 /* Algo_UIKit_Binding.h in Headers */,
-				D095A03D28A3164E009855E3 /* Algo_objective_c_utils.h in Headers */,
-				D095A03B28A31649009855E3 /* Algo_Controller_that_can_receive_data_from_AlgoEngine_protcol.h in Headers */,
 				37EB4EEA210649E100E10461 /* Drawsana.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -538,7 +526,6 @@
 				3762297A2113AB7F0034D0E3 /* PenShape.swift in Sources */,
 				37362D6C211B6930003E5ACA /* CGRect+DrawsanaExtensions.swift in Sources */,
 				D024467821DA1ED000E431C8 /* StarTool_PentagonTool_TriangleTool.swift in Sources */,
-				D095A03828A31313009855E3 /* Algo_UIKit_Binding.mm in Sources */,
 				D095A03428A312F6009855E3 /* ColorPickerViewController.swift in Sources */,
 				376229812113AD570034D0E3 /* ToolOperationContext.swift in Sources */,
 				3762298B2113D7910034D0E3 /* TextTool.swift in Sources */,
@@ -562,7 +549,6 @@
 				D095A03628A31307009855E3 /* Algo_Centering_ScrollView.swift in Sources */,
 				3777F2FD21068A5C009A9AC5 /* Shape.swift in Sources */,
 				D095A03528A312F8009855E3 /* ToolPickerViewController.swift in Sources */,
-				D095A03728A31310009855E3 /* Algo_objective_c_utils.m in Sources */,
 				37885E2C210A9C95003A918F /* PenTool_EraserTool.swift in Sources */,
 				37362D5C21151684003E5ACA /* TextShape.swift in Sources */,
 				371BE7D02123643100861596 /* ImmediatePanGestureRecognizer.swift in Sources */,
@@ -756,7 +742,8 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Drawsana/_Support/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -789,7 +776,8 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Drawsana/_Support/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

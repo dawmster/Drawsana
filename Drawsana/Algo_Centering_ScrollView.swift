@@ -10,7 +10,7 @@
 import Foundation
 
 @IBDesignable
-@objc public class Algo_Centering_ScrollView: UIScrollView, UIScrollViewDelegate,Algo_Other_Important_UI_Object, UIGestureRecognizerDelegate {
+@objc public class Algo_Centering_ScrollView_drawsana: UIScrollView, UIScrollViewDelegate,Algo_Other_Important_UI_Object, UIGestureRecognizerDelegate {
     private var binding_object = Algo_Binding()
     
     //HUGE leak fixed - Algo_Centering_ScrollView - stopped observing and removing

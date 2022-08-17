@@ -200,7 +200,7 @@ import CoreData
 
     drawingView.translatesAutoresizingMaskIntoConstraints = true
 
-    let scrv = Algo_Centering_ScrollView()
+    let scrv = Algo_Centering_ScrollView_drawsana()
     scrv.view_to_zoom_in_scroll_view = imageView
     scrv.view_second = drawingView
     scrv.addSubview(imageView)
