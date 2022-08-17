@@ -70,10 +70,11 @@ import Foundation
     }
     private var single_fire:Bool = false
     private var no_animation:Bool = true
-    
+
     public override init(frame: CGRect) {
         super.init(frame:frame)
         self.delegate = self
+        setupScrollWheel()
     }
     public required init?(coder aDecoder: NSCoder) {
 
@@ -82,8 +83,31 @@ import Foundation
         self.delegate = self
       
         self.pinchGestureRecognizer?.delegate = self
+        setupScrollWheel()
+    }
+  private var shift_pressed: Bool = false
+
+  func setupScrollWheel() {
+    //handling zoom with mouseWheel while Shift is pressed
+    if #available(macCatalyst 13.4, *) {
+      //self.pinchGestureRecognizer?.delegate = self
+      let scrollWheelGesture = UIPanGestureRecognizer(target: self, action: #selector(scrollWheelGestureRecognizer(_:)))
+      scrollWheelGesture.allowedScrollTypesMask = .all
+      scrollWheelGesture.maximumNumberOfTouches = 0
+      //scrollWheelGesture.delegate = self
+      self.addGestureRecognizer(scrollWheelGesture)
       self.panGestureRecognizer.isEnabled = false
     }
+  }
+  //handling zoom with mouseWheel while Shift is pressed - this method will fire only when setupScrollWhell will detect macOS
+  @objc func scrollWheelGestureRecognizer(_ recognizer: UIPanGestureRecognizer) {
+    if( recognizer.modifierFlags == .shift ) {
+      let delta = recognizer.translation(in: self)
+      let zoom_d:CGFloat = ( delta.y) / 2000;
+      self.zoomScale += zoom_d
+      self.setNeedsLayout()
+    }
+  }
 
     public func scrollViewDidZoom(_ scrollView: UIScrollView) {
         if( keep_centered_if_smaller == true ){
