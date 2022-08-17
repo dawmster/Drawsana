@@ -108,11 +108,19 @@ import CoreData
   override func loadView() {
     self.view = UIView()
 
+    let white_when_light = UIColor.init(dynamicProvider: { traitCollection in
+      if( traitCollection.userInterfaceStyle == .light){
+        return .white
+      }
+      else {
+        return .black
+      }
+    })
     deleteButton.translatesAutoresizingMaskIntoConstraints = false
 //    deleteButton.setTitle("􀈒", for: .normal)
     deleteButton.setImage(UIImage(systemName: "trash"), for: .normal)
     deleteButton.addTarget( self, action: #selector(DrawingOnPhotoViewController.removeSelection(_:)), for: .touchUpInside)
-    deleteButton.tintColor = UIColor.white
+    deleteButton.tintColor = white_when_light
     
     viewFinalImageButton.translatesAutoresizingMaskIntoConstraints = false
     viewFinalImageButton.setTitle("􁅆", for: .normal)
@@ -126,33 +134,36 @@ import CoreData
     toolButton.setTitle("No Tool", for: .normal)
     toolButton.addTarget(self, action: #selector(openToolMenu(_:)), for: .touchUpInside)
     toolButton.setContentHuggingPriority(.required, for: .vertical)
+    toolButton.tintColor = white_when_light
 
     undoButton.translatesAutoresizingMaskIntoConstraints = false
     undoButton.setTitle("←", for: .normal)
+    undoButton.tintColor = white_when_light
     undoButton.addTarget(drawingView.operationStack, action: #selector(DrawingOperationStack.undo), for: .touchUpInside)
 
     redoButton.translatesAutoresizingMaskIntoConstraints = false
     redoButton.setTitle("→", for: .normal)
+    redoButton.tintColor = white_when_light
     redoButton.addTarget(drawingView.operationStack, action: #selector(DrawingOperationStack.redo), for: .touchUpInside)
 
     strokeColorButton.translatesAutoresizingMaskIntoConstraints = false
     strokeColorButton.addTarget(self, action: #selector(DrawingOnPhotoViewController.openStrokeColorMenu(_:)), for: .touchUpInside)
-    strokeColorButton.layer.borderColor = UIColor.white.cgColor
+    strokeColorButton.layer.borderColor = white_when_light.cgColor
     strokeColorButton.layer.borderWidth = 0.5
 
     fillColorButton.translatesAutoresizingMaskIntoConstraints = false
     fillColorButton.addTarget(self, action: #selector(DrawingOnPhotoViewController.openFillColorMenu(_:)), for: .touchUpInside)
-    fillColorButton.layer.borderColor = UIColor.white.cgColor
+    fillColorButton.layer.borderColor = white_when_light.cgColor
     fillColorButton.layer.borderWidth = 0.5
 
     strokeWidthButton.translatesAutoresizingMaskIntoConstraints = false
     strokeWidthButton.addTarget(self, action: #selector(DrawingOnPhotoViewController.cycleStrokeWidth(_:)), for: .touchUpInside)
-    strokeWidthButton.layer.borderColor = UIColor.white.cgColor
+    strokeWidthButton.layer.borderColor = white_when_light.cgColor
     strokeWidthButton.layer.borderWidth = 0.5
 
     reloadButton.translatesAutoresizingMaskIntoConstraints = false
     reloadButton.addTarget(self, action: #selector(DrawingOnPhotoViewController.reload(_:)), for: .touchUpInside)
-    reloadButton.layer.borderColor = UIColor.white.cgColor
+    reloadButton.layer.borderColor = white_when_light.cgColor
     reloadButton.layer.borderWidth = 0.5
     reloadButton.tintColor = UIColor.white
 //    reloadButton.setTitle("􀌢", for: .normal)
@@ -162,7 +173,7 @@ import CoreData
     dismissButton.translatesAutoresizingMaskIntoConstraints = false
     dismissButton.addTarget(self, action: #selector(DrawingOnPhotoViewController.go_back(_:)), for: .touchUpInside)
     dismissButton.tintColor = UIColor.white
-    reloadButton.layer.borderColor = UIColor.white.cgColor
+    reloadButton.layer.borderColor = white_when_light.cgColor
     reloadButton.layer.borderWidth = 0.5
     dismissButton.setImage(UIImage(systemName: "backward"), for: .normal)
 //    dismissButton.buttonType = .close
@@ -171,6 +182,14 @@ import CoreData
     toolbarStackView.axis = .horizontal
     toolbarStackView.distribution = .equalSpacing
     toolbarStackView.alignment = .fill
+    self.view.backgroundColor = UIColor.init(dynamicProvider: { traitCollection in
+      if( traitCollection.userInterfaceStyle == .light){
+        return .black
+      }
+      else {
+        return .white
+      }
+    })
     view.addSubview(toolbarStackView)
 
     imageView.translatesAutoresizingMaskIntoConstraints = true
