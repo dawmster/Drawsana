@@ -53,7 +53,7 @@
 		D095A03328A312F3009855E3 /* DrawingOnPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EB4EFE21064A5E00E10461 /* DrawingOnPhotoViewController.swift */; };
 		D095A03428A312F6009855E3 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372093CE21345862001A906E /* ColorPickerViewController.swift */; };
 		D095A03528A312F8009855E3 /* ToolPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372093D021345DB7001A906E /* ToolPickerViewController.swift */; };
-		D095A03628A31307009855E3 /* Algo_Centering_ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C4916928A00BF300E0A02B /* Algo_Centering_ScrollView.swift */; };
+		D095A03628A31307009855E3 /* Algo_Centering_ScrollView_drawsana.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C4916928A00BF300E0A02B /* Algo_Centering_ScrollView_drawsana.swift */; };
 		D095A03A28A31370009855E3 /* Drawsana-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = D095A03928A31370009855E3 /* Drawsana-Bridging-Header.h */; };
 		D0E97E8321D0D3BA007722D7 /* StarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E97E8221D0D3BA007722D7 /* StarShape.swift */; };
 		D0E97E8521D0DD90007722D7 /* NgonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E97E8421D0DD90007722D7 /* NgonShape.swift */; };
@@ -150,7 +150,7 @@
 		D095A03928A31370009855E3 /* Drawsana-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Drawsana-Bridging-Header.h"; sourceTree = "<group>"; };
 		D0C4915F28A00BB000E0A02B /* DrawsanaTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DrawsanaTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		D0C4916028A00BB000E0A02B /* Drawsana Demo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Drawsana Demo-Bridging-Header.h"; sourceTree = "<group>"; };
-		D0C4916928A00BF300E0A02B /* Algo_Centering_ScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Algo_Centering_ScrollView.swift; sourceTree = "<group>"; };
+		D0C4916928A00BF300E0A02B /* Algo_Centering_ScrollView_drawsana.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Algo_Centering_ScrollView_drawsana.swift; sourceTree = "<group>"; };
 		D0E97E8221D0D3BA007722D7 /* StarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarShape.swift; sourceTree = "<group>"; };
 		D0E97E8421D0DD90007722D7 /* NgonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NgonShape.swift; sourceTree = "<group>"; };
 		D0F3B43C21D34F4000701BB4 /* CGFloat+DrawsanaExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+DrawsanaExtensions.swift"; sourceTree = "<group>"; };
@@ -325,7 +325,7 @@
 				37EB4EFE21064A5E00E10461 /* DrawingOnPhotoViewController.swift */,
 				372093CE21345862001A906E /* ColorPickerViewController.swift */,
 				372093D021345DB7001A906E /* ToolPickerViewController.swift */,
-				D0C4916928A00BF300E0A02B /* Algo_Centering_ScrollView.swift */,
+				D0C4916928A00BF300E0A02B /* Algo_Centering_ScrollView_drawsana.swift */,
 				376229882113ADEA0034D0E3 /* Data model */,
 				376229842113ADB30034D0E3 /* Helpers */,
 				3762296F2113AA4C0034D0E3 /* Shapes */,
@@ -546,7 +546,7 @@
 				37362D602118E46F003E5ACA /* DrawingOperationStack.swift in Sources */,
 				3777F2FF21068A78009A9AC5 /* DrawingTool.swift in Sources */,
 				3706B15E211CF29500D41622 /* DrawingToolForShapeWithTwoPoints.swift in Sources */,
-				D095A03628A31307009855E3 /* Algo_Centering_ScrollView.swift in Sources */,
+				D095A03628A31307009855E3 /* Algo_Centering_ScrollView_drawsana.swift in Sources */,
 				3777F2FD21068A5C009A9AC5 /* Shape.swift in Sources */,
 				D095A03528A312F8009855E3 /* ToolPickerViewController.swift in Sources */,
 				37885E2C210A9C95003A918F /* PenTool_EraserTool.swift in Sources */,
