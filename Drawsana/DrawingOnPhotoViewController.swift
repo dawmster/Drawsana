@@ -269,15 +269,15 @@ import CoreData
     super.viewDidLoad()
 
     // Better error reporting in dev
-    Drawing.debugSerialization = true
+    Drawing.debugSerialization = false
 
 //    navigationItem.leftBarButtonItem = deleteButton
 //    navigationItem.rightBarButtonItem = viewFinalImageButton
 
     // Set initial tool to whatever `toolIndex` says
-    drawingView.set(tool: tools[0])
-    drawingView.userSettings.strokeColor = Constants.colors.first!
-    drawingView.userSettings.fillColor = Constants.colors.last!
+    drawingView.set(tool: ArrowTool() )
+    drawingView.userSettings.strokeColor = UIColor.systemRed
+    drawingView.userSettings.fillColor = nil
     drawingView.userSettings.strokeWidth = strokeWidths[strokeWidthIndex]
     drawingView.userSettings.fontName = "Marker Felt"
     applyUndoViewState()
