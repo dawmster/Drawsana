@@ -110,7 +110,7 @@ public protocol DrawsanaViewDelegate: AnyObject {
    All "finished" shapes are rendered together to this buffer. If no tool
    operation is active, this is the image that is displayed.
    */
-  private var persistentBuffer: UIImage?
+  public var persistentBuffer: UIImage?
 
   /**
    When a tool operation begins, `persistentBuffer` is copied to this buffer.

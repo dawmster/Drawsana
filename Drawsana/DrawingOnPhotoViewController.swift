@@ -69,8 +69,8 @@ import CoreData
       strokeWidthButton,
 //      reloadButton,
       toolButton,
-      deleteButton
-//      viewFinalImageButton
+      deleteButton,
+      viewFinalImageButton
     ])
   }()
 
@@ -123,7 +123,8 @@ import CoreData
     deleteButton.tintColor = white_when_light
     
     viewFinalImageButton.translatesAutoresizingMaskIntoConstraints = false
-    viewFinalImageButton.setTitle("􁅆", for: .normal)
+    viewFinalImageButton.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
+    viewFinalImageButton.tintColor = white_when_light 
     viewFinalImageButton.addTarget( self, action: #selector(DrawingOnPhotoViewController.viewFinalImage(_:)), for: .touchUpInside)
  
     
@@ -426,18 +427,65 @@ import CoreData
     let jsonDecoder = JSONDecoder()
     let _ = try! jsonDecoder.decode(Drawing.self, from: jsonData)
 
-    guard
-      let image = drawingView.render(over: imageView.image),
-      let data = image.jpegData(compressionQuality: 0.75),
-      (try? data.write(to: savedImageURL)) != nil else
-    {
+      
 
-//      assert(false, "Can't create or save image")
-      return
+      let ret : Algo_five<NSNumber/*iPhone*/,NSNumber/*iPad*/,NSNumber/*Mac*/,NSNumber/*TV*/,NSNumber/*CarPlay*/> = Algo_View_Utils.algo_running_on_iPad_or_iPhone()
+      var on_macOS : Bool = false
+      if  let v = ret.third {
+          on_macOS = v as! Bool
+      }
+      
+      
+      
+    if on_macOS { //macOs is using QuickLook
+        guard
+          let image = drawingView.render(over: imageView.image),
+          let data = image.jpegData(compressionQuality: 0.75),
+          (try? data.write(to: savedImageURL)) != nil else
+        {
+
+        //      assert(false, "Can't create or save image")
+          return
+        }
+        let vc = QLPreviewController(nibName: nil, bundle: nil)
+        vc.dataSource = self
+        present(vc, animated: true, completion: nil)
     }
-    let vc = QLPreviewController(nibName: nil, bundle: nil)
-    vc.dataSource = self
-    present(vc, animated: true, completion: nil)
+      else {
+          //iOS
+          
+//          guard let imageToShare = drawingView.render(over: imageView.image) else { return }
+//          let imageToShare = UIGraphicsImageRenderer(size: imageView.image.size )
+          guard let img = imageView.image else {return}
+          let targetSize = img.size
+          var imageToShare : UIImage?
+          
+          if  let drawingCGImage = drawingView.persistentBuffer?.cgImage {
+              let drawingUIImage = UIImage( cgImage: drawingCGImage )
+              let format = UIGraphicsImageRendererFormat()
+              format.scale = 1
+              let renderer = UIGraphicsImageRenderer(size: targetSize, format: format)
+              imageToShare = renderer.image { context in
+                  imageView.image?.draw(at: .zero)
+                  drawingUIImage.draw(in: CGRect(origin: .zero, size: targetSize))
+              }
+          }
+          
+          if imageToShare==nil { imageToShare = img }
+          else if imageToShare?.size == .zero {
+              imageToShare = img
+          }
+          
+          let activityViewController = UIActivityViewController(activityItems: [imageToShare as Any], applicationActivities: nil)
+          activityViewController.popoverPresentationController?.sourceView = viewFinalImageButton // so that iPads won't crash
+          
+          // exclude some activity types from the list (optional)
+//          activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
+          
+          // present the view controller
+          self.present(activityViewController, animated: true, completion: nil)
+          
+      }
   }
 
   private func presentPopover(_ viewController: UIViewController, sourceView: UIView) {
@@ -490,7 +538,7 @@ import CoreData
   @objc private func reload(_ sender: Any?) {
     drawing_data = NSData()
     return
-    print("Serializing/deserializing...")
+//    print("Serializing/deserializing...")
     
     if(reload_toggle == false){
       let encoder = JSONEncoder()
