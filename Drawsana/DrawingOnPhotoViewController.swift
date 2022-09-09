@@ -83,9 +83,9 @@ import CoreData
   lazy var selectionTool = { return SelectionTool(delegate: self) }()
 
   lazy var tools: [DrawingTool] = { return [
+    selectionTool,
     PenTool(),
     textTool,
-    selectionTool,
     EllipseTool(),
     EraserTool(),
     LineTool(),
